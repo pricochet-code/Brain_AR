@@ -2,11 +2,45 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerveau RA - Roboto Noir</title>
+    <title>Anatomie Cerveau RA - Interactif</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <style>
+      /* Style du bouton sur l'écran du téléphone */
+      .mainUI {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        font-family: 'Roboto', sans-serif;
+      }
+      #toggleButton {
+        padding: 15px 30px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: 2px solid white;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+      }
+      #toggleButton:active {
+        background-color: #333;
+      }
+    </style>
   </head>
+
   <body>
+    <div class="mainUI">
+      <button id="toggleButton">Masquer les légendes</button>
+    </div>
+
     <a-scene 
       mindar-image="imageTargetSrc: ./targets.mind;" 
       color-space="sRGB" 
@@ -15,28 +49,47 @@
       device-orientation-permission-ui="enabled: false">
       
       <a-assets>
-        <img id="img_nc" src="./label_nc_roboto.png">
-        <img id="img_pu" src="./label_putamen_roboto.png">
-        <img id="img_th" src="./label_thalamus_roboto.png">
-        <img id="img_cortex" src="./label_cortex_roboto.png">
-        <img id="img_ventricule" src="./label_ventricule_roboto.png">
+        <img id="img_nc" src="./label_nc.png">
+        <img id="img_pu" src="./label_putamen.png">
+        <img id="img_pa" src="./label_pallidum.png">
+        <img id="img_th" src="./label_thalamus.png">
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
         
-        <a-image src="#img_nc" position="-0.3 0.4 0" width="0.3" height="0.1"></a-image>
+        <a-entity id="labels-container" visible="true">
+          
+          <a-image src="#img_nc" position="-0.25 0.35 0" width="0.3" height="0.1"></a-image>
+          
+          <a-image src="#img_pu" position="0.45 0.25 0" width="0.25" height="0.08"></a-image>
 
-        <a-image src="#img_pu" position="0.5 0.3 0" width="0.25" height="0.08"></a-image>
+          <a-image src="#img_pa" position="0.45 0.1 0" width="0.25" height="0.08"></a-image>
 
-        <a-image src="#img_th" position="0.5 -0.1 0" width="0.25" height="0.08"></a-image>
+          <a-image src="#img_th" position="0.45 -0.15 0" width="0.25" height="0.08"></a-image>
 
-        <a-image src="#img_cortex" position="-0.6 0.2 0" width="0.3" height="0.1"></a-image>
+          </a-entity>
 
-        <a-image src="#img_ventricule" position="0.0 0.2 0" width="0.3" height="0.1"></a-image>
-        
       </a-entity>
     </a-scene>
+
+    <script>
+      const btn = document.querySelector('#toggleButton');
+      const labels = document.querySelector('#labels-container');
+      let isVisible = true;
+
+      btn.addEventListener('click', () => {
+        isVisible = !isVisible; // Alterne entre vrai et faux
+        labels.setAttribute('visible', isVisible); // Change la visibilité du groupe
+        
+        // Change le texte du bouton
+        if (isVisible) {
+          btn.innerHTML = "Masquer les légendes";
+        } else {
+          btn.innerHTML = "Afficher les légendes";
+        }
+      });
+    </script>
   </body>
 </html>

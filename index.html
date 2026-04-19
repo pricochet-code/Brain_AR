@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerveau RA - Légendes</title>
+    <title>Cerveau RA - Roboto Noir</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
@@ -14,25 +14,27 @@
       vr-mode-ui="enabled: false" 
       device-orientation-permission-ui="enabled: false">
       
+      <a-assets>
+        <img id="img_nc" src="./label_nc_roboto.png">
+        <img id="img_pu" src="./label_putamen_roboto.png">
+        <img id="img_th" src="./label_thalamus_roboto.png">
+        <img id="img_cortex" src="./label_cortex_roboto.png">
+        <img id="img_ventricule" src="./label_ventricule_roboto.png">
+      </a-assets>
+
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
         
-        <a-text value="Noyau Caude (tete)" color="white" align="center" width="2" position="-0.3 0.4 0"
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-entity line="start: -0.15 0.25 0; end: -0.3 0.35 0; color: #FFF"></a-entity>
+        <a-image src="#img_nc" position="-0.3 0.4 0" width="0.3" height="0.1"></a-image>
 
-        <a-text value="Putamen" color="white" align="center" width="2" position="0.5 0.3 0"
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-entity line="start: 0.3 0.2 0; end: 0.5 0.25 0; color: #FFF"></a-entity>
+        <a-image src="#img_pu" position="0.5 0.3 0" width="0.25" height="0.08"></a-image>
 
-        <a-text value="Pallidum" color="white" align="center" width="2" position="0.5 0.1 0"
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-entity line="start: 0.2 0.05 0; end: 0.5 0.05 0; color: #FFF"></a-entity>
+        <a-image src="#img_th" position="0.5 -0.1 0" width="0.25" height="0.08"></a-image>
 
-        <a-text value="Thalamus" color="white" align="center" width="2" position="0.5 -0.1 0"
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-entity line="start: 0.1 -0.05 0; end: 0.5 -0.15 0; color: #FFF"></a-entity>
+        <a-image src="#img_cortex" position="-0.6 0.2 0" width="0.3" height="0.1"></a-image>
+
+        <a-image src="#img_ventricule" position="0.0 0.2 0" width="0.3" height="0.1"></a-image>
         
       </a-entity>
     </a-scene>
